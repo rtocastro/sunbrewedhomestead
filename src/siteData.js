@@ -24,7 +24,7 @@ export const site = {
   adoptionIntro: 'Welcome! Learn about adoptable cats and take the next step toward giving one a home.',
   photos: {
     goats: ['/images/goat-1.jpg', '/images/goat-2.jpg', '/images/goat-3.jpg'],
-    compost: '/images/composting-101.jpg',
+    compost: '/images/composting-101.png',
     team: ['/images/team-1.jpg', '/images/team-2.jpg', '/images/team-3.jpg']
   },
   team: [
