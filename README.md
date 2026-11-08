@@ -1,16 +1,32 @@
-# React + Vite
+# Sunbrewed Homestead React/Vite starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Copy `src/App.jsx`, `src/main.jsx`, `src/styles.css`, and `src/siteData.js` into your existing React/Vite project's `src/` folder. Copy the `public/` contents into your existing `public/` folder.
 
-Currently, two official plugins are available:
+Install router: `npm install react-router-dom`
+Run: `npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Editable content
+All text, stats, photo filenames, and external links live in `src/siteData.js`.
 
-## React Compiler
+Add images to `public/images/`:
+- `logo.png`
+- `goat-1.jpg`, `goat-2.jpg`, `goat-3.jpg`
+- `composting-101.jpg`
+- `team-1.jpg`, `team-2.jpg`, `team-3.jpg`, `team-group.jpg`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+If an image is missing, the starter shows a styled placeholder (except the optional logo).
 
-## Expanding the ESLint configuration
+## Forms (important)
+Volunteer and Contact currently use a **mailto draft**, NOT true automatic form submission. Add the receiving email to `site.email` to activate drafting. On submission, the visitor must send the draft from their own email client. For production-quality send-by-email forms with confirmation, spam protection, and no email app requirement, integrate a verified backend or hosted form service. Do not put email service secret keys in client-side JSX.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## External buttons
+Missing external URLs render non-clickable Coming soon pills instead of dead links. Add real donation, kitten listings, adoption application, foster, and Pickfresh URLs to `siteData.js`.
+
+## Instagram
+Currently has a placeholder. A real Instagram embed requires an approved provider snippet or API/widget. Avoid injecting arbitrary `instagramEmbedHtml` via `dangerouslySetInnerHTML`.
+
+## Routing/deploy
+Uses `BrowserRouter`; configure your static hosting to serve `index.html` for unknown page paths to support direct visits to routes.
+
+## Colors
+Reference swatches are in `public/palette-reference.png` and token constants in `src/siteData.js`; matching hex values are in the stylesheet. Responsive/mobile layout and basic accessibility are included.
