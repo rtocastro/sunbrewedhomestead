@@ -39,7 +39,30 @@ function Layout() {
       <Route path="/volunteer" element={<Volunteer />} /><Route path="/contact" element={<Contact />} />
       <Route path="/social" element={<Social />} /><Route path="/composting-101" element={<Composting />} />
       <Route path="*" element={<section className="section"><Heading title="Page not found" /><Action to="/">Back home</Action></section>} />
-    </Routes></main><footer className="footer"><span>© {new Date().getFullYear()} Sunbrewed Homestead</span><span>Rooted in community. Growing together.</span></footer>
+    </Routes></main>
+
+    <footer className="footer">
+      <div className="footer-support">
+        <span>Rooted in community. Growing together.</span>
+
+        {site.donationUrl && (
+          <a
+            href={site.donationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-donate"
+          >
+            ♡ Support the Homestead
+          </a>
+        )}
+      </div>
+
+      <span>
+        © {new Date().getFullYear()} Sunbrewed Homestead
+      </span>
+    </footer>
+
+
   </div>;
 }
 function Home() {
@@ -61,14 +84,241 @@ function Cats() {
 }
 
 function Adopt() { return <section className="section narrow"><Heading eyebrow="Kiki's Cat Club" title="Welcome, future adopters!">{site.adoptionIntro}</Heading><div className="button-group"><Action to={site.adoptionListingsUrl} external variant="turquoise">View available cats</Action><Action to={site.adoptionApplicationUrl} external variant="harvest">Open adoption application</Action></div></section>; }
-function Resources() { return <section className="section narrow"><Heading eyebrow="Community cats" title="Spay / neuter & TNR resources">This page will provide community cat spay/neuter support, TNR guidance, and verified local resources.</Heading><div className="info-panel"><h2>Helpful starting points</h2><p>Add verified local clinics, appointment links, eligibility information, and instructions here before publishing.</p><Action to="/contact">Ask us a question</Action></div></section>; }
+
+function Resources() {
+  const clinics = [
+    {
+      name: 'CAMP East Valley',
+      category: 'Low-cost veterinary clinic',
+      address: '14409 Vanowen St, Van Nuys, CA 91405',
+      phone: '(310) 574-5555',
+      description:
+        'Affordable spay/neuter appointments and vaccinations. Contact the clinic to confirm services, pricing, and eligibility.',
+      url: 'https://www.campla.org/clinics'
+    },
+    {
+      name: 'Pet Orphans of Southern California',
+      category: 'Veterinary care and rescue',
+      address: '7720 Gloria Ave, Van Nuys, CA 91406',
+      phone: '(818) 901-0190',
+      description:
+        'Affordable veterinary services, spay/neuter, vaccinations, and animal rescue resources. Appointments may be required.',
+      url: 'https://petorphans.org/'
+    },
+    {
+      name: 'FixNation',
+      category: 'Community cat TNR assistance',
+      address: 'Los Angeles and participating partner clinics',
+      phone: '',
+      description:
+        'Supports free spay/neuter for eligible community cats through partner clinics. Check current participating locations and appointment requirements.',
+      url: 'https://fixnation.org/fixnation-programs/'
+    }
+  ];
+
+  return (
+    <section className="section">
+      <Heading
+        eyebrow="Kiki's Cat Club"
+        title="Community Cat Resources"
+      >
+        Helping our neighbors care for community cats
+        throughout Van Nuys and the San Fernando Valley.
+      </Heading>
+
+      <div className="resource-intro">
+        <h2>Found a community cat?</h2>
+        <p>
+          Not every outdoor cat is lost or abandoned.
+          Some are cared for by neighbors and live
+          outdoors. Trap-Neuter-Return (TNR) helps
+          humanely manage community cat populations.
+        </p>
+      </div>
+
+      <div className="section-intro">
+        <span className="eyebrow">Start here</span>
+        <h2>How TNR works</h2>
+      </div>
+
+      <div className="learning-grid">
+        <article>
+          <b>👀</b>
+          <h2>Observe</h2>
+          <p>
+            Check whether the cat appears healthy,
+            has an ear tip, or may belong to someone.
+          </p>
+        </article>
+
+        <article>
+          <b>🔢🧮📐𝞹📈📚</b>
+          <h2>Plan</h2>
+          <p>
+            Contact a TNR organization, arrange
+            surgery, and obtain any required permits
+            before trapping.
+          </p>
+        </article>
+
+        <article>
+          <b>🪤</b>
+          <h2>Trap & Treat</h2>
+          <p>
+            Use humane trapping methods and transport
+            the cat to a participating veterinary clinic.
+          </p>
+        </article>
+
+        <article>
+          <b>🔄🐈</b>
+          <h2>Return & Care</h2>
+          <p>
+            Follow veterinary recovery instructions,
+            then return the cat to its original outdoor
+            home when medically cleared.
+          </p>
+        </article>
+      </div>
+
+      <div className="section-intro resource-heading">
+        <span className="eyebrow">Local assistance</span>
+        <h2>Clinics & Organizations</h2>
+        <p>
+          Resources serving Van Nuys and nearby
+          Los Angeles communities.
+        </p>
+      </div>
+
+      <div className="resource-grid">
+        {clinics.map(clinic => (
+          <article className="resource-card" key={clinic.name}>
+            <span className="eyebrow">
+              {clinic.category}
+            </span>
+
+            <h3>{clinic.name}</h3>
+            <p>{clinic.description}</p>
+
+            <p className="resource-details">
+              {clinic.address}
+              {clinic.phone && (
+                <>
+                  <br />
+                  {clinic.phone}
+                </>
+              )}
+            </p>
+
+            <a
+              className="button green"
+              href={clinic.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Website ↗
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div className="resource-panel">
+        <span className="eyebrow">City of Los Angeles</span>
+        <h2>Spay/Neuter Assistance</h2>
+
+        <p>
+          LA Animal Services offers the Citywide Cat
+          Program for eligible community cats, including
+          trapping permits and spay/neuter vouchers.
+        </p>
+
+        <p>
+          If you're seeking help for your own pet cat,
+          the City has a separate spay/neuter assistance
+          program.
+        </p>
+
+        <div className="button-group">
+          <a
+            className="button green"
+            href="https://www.laanimalservices.com/citywide-cat-program"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Community Cat Program ↗
+          </a>
+
+          <a
+            className="button purple"
+            href="https://www.laanimalservices.com/spay-and-neuter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pet Spay/Neuter Assistance ↗
+          </a>
+        </div>
+      </div>
+
+      <div className="resource-help">
+        <h2>Still need help?</h2>
+        <p>
+          Have questions about community cats in your
+          neighborhood? Reach out to Kiki's Cat Club.
+          We can discuss your situation and point you
+          toward available resources.
+        </p>
+
+        <Action to="/contact">
+          Contact Kiki's Cat Club
+        </Action>
+      </div>
+
+      <p className="resource-disclaimer">
+        Resources and program availability may change.
+        Contact providers directly to confirm costs,
+        appointments, eligibility, and services.
+        Sunbrewed Homestead does not operate the
+        third-party services listed above.
+      </p>
+    </section>
+  );
+}
+
 function FarmStand() { return <section className="section narrow"><Heading eyebrow="Straight from the homestead" title="Farm Stand">{site.farmStandIntro}</Heading><div className="info-panel warm"><h2>See what’s available</h2><p>Pickfresh link or embed can be added once confirmed.</p><Action to={site.pickfreshUrl} external variant="harvest">Browse Pickfresh</Action></div></section>; }
 function Composting() {
-  return <section className="section"><Heading eyebrow="Get started" title="Composting 101">Composting is a way to turn organic materials into a soil-improving resource.</Heading>
+  return <section className="section">
+
+    <Heading eyebrow="Get started" title="Composting 101">At Sun Brewed Homestead, we turn green scraps into a valuable resource for our garden. Our worm farm and three-bin composting system, built from pallets, helps us break down organic material efficiently while incorporating goat and chicken manure into the mix for extra nutrients.
+      <br />
+      <br />
+      Drop off your compostable materials with us instead of tossing them out - our garden thanks you!
+      <br />
+      <br />
+      What Goes into Our Compost:
+      Greens (Nitrogen): Veggie/fruit scraps, coffee grounds, egg shells
+      <br />
+      <br />
+      <font color="brown"><strong>Browns</strong></font> (Carbon): newspaper, hay, cardboard
+      <br />
+      <br />
+      Manure: Our chickens and goats provide rich manure - enriching the final product.
+      <br />
+      <br />
+      How We Compost:
+      Three-Bin System: We layer greens and browns in a rotating three-bin setup, allowing one bin to decompose while we fill the others.
+      <br />
+      <br />
+      Water and Turn: We keep our compost moist and turn it regularly to add oxygen, helping it break down faster.
+      <br />
+      <br />
+      Manure Magic: Goat and chicken manure adds essential nutrients, making our compost a powerful soil booster..</Heading>
     <div className="learning-grid"><article><b>01</b><h2>Choose a spot</h2><p>Pick a well-drained place or a suitable enclosed bin with access for turning and moisture checks.</p></article>
       <article><b>02</b><h2>Balance materials</h2><p>Mix nitrogen-rich greens (fruit and vegetable scraps) with carbon-rich browns (dry leaves and shredded paper).</p></article>
       <article><b>03</b><h2>Maintain your pile</h2><p>Keep materials damp like a wrung-out sponge, provide airflow, and turn occasionally.</p></article>
-      <article><b>04</b><h2>Use finished compost</h2><p>Wait until the material is dark, crumbly, and earthy-smelling before applying it to soil.</p></article></div></section>;
+      <article><b>04</b><h2>Use finished compost</h2><p>Wait until the material is dark, crumbly, and earthy-smelling before applying it to soil.</p></article></div>
+
+
+  </section>;
 }
 
 function EmailDraftForm({ type }) {

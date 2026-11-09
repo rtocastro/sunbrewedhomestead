@@ -29,14 +29,14 @@ export const site = {
     team: ['/images/team-1.jpg', '/images/team-2.jpg', '/images/team-3.jpg']
   },
   team: [
-    { name: 'Team member 1', role: 'Role forthcoming', image: '/images/team-1.jpg' },
-    { name: 'Team member 2', role: 'Role forthcoming', image: '/images/team-2.jpg' },
+    { name: 'Ava Rosate', role: 'Executive Director', image: '/images/team-1.jpg' },
+    { name: 'Ricardo Torres Castro', role: 'Director of Community Engagement & Development', image: '/images/team-2.jpg' },
     { name: 'Team member 3', role: 'Role forthcoming', image: '/images/team-3.jpg' },
   ],
   stats: [
-    { label: 'Found forever homes', value: null },
-    { label: 'Trapped, neutered & returned', value: null },
-    { label: 'Organized / hosted events', value: null },
-    { label: 'Ongoing care & shelter', value: null },
+    { label: 'Found forever homes', value: 29 },
+    { label: 'Trapped, neutered & returned', value: 21 },
+    { label: 'Organized / hosted events', value: 7 },
+    { label: 'Ongoing care & shelter', value: 23 },
   ],
 };

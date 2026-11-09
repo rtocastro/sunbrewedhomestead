@@ -628,3 +628,178 @@ textarea:focus-visible {
   max-width: 540px !important;
   width: 100% !important;
 }
+
+
+/* Footer donation link */
+.footer-support {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+
+.footer-donate:hover {
+  color: #00B2B7;
+  text-decoration: underline;
+}
+
+
+/* Center and stack footer content */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 30px 20px;
+}
+
+
+
+/* Subtle donation link */
+.footer-donate {
+  color: #F7B01F;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footer-donate:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+
+/* Mobile: Stack and center everything */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    padding: 30px 20px;
+  }
+
+  .footer-support {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+}
+
+
+/* Community Cat Resources */
+
+.resource-intro {
+  background: #eaf7f1;
+  padding: 30px;
+  border-radius: 22px;
+  margin: 28px 0 40px;
+}
+
+.resource-intro h2,
+.resource-panel h2,
+.resource-help h2 {
+  margin-top: 0;
+}
+
+.resource-heading {
+  margin-top: 50px;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 30px 0 50px;
+}
+
+.resource-card {
+  background: #fff;
+  border: 1px solid #dcebe3;
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.resource-card h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.resource-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.resource-details {
+  font-size: 0.9rem;
+  color: #52645c;
+  margin-top: auto !important;
+}
+
+.resource-card .button {
+  align-self: flex-start;
+}
+
+.resource-panel {
+  background: #eaf7f1;
+  border-radius: 22px;
+  padding: 30px;
+  margin-bottom: 35px;
+}
+
+.resource-panel .button-group {
+  margin-top: 22px;
+}
+
+.resource-help {
+  text-align: center;
+  background: #fff4d8;
+  border-radius: 22px;
+  padding: 36px 25px;
+}
+
+.resource-help p {
+  max-width: 650px;
+  margin: 15px auto 25px;
+}
+
+.resource-disclaimer {
+  font-size: 0.8rem;
+  color: #64716a;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-intro,
+  .resource-panel {
+    padding: 22px;
+  }
+
+  .resource-card {
+    padding: 22px;
+  }
+
+  .resource-panel .button-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
