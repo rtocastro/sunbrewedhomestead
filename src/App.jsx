@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 import { site } from './siteData';
+
 import './styles.css';
 
 const nav = [
@@ -50,7 +51,7 @@ function Home() {
       <div className="photo-grid">{site.photos.goats.map((src, i) => <Photo key={src} src={src} alt={`Goat photo ${i + 1}`} />)}</div></section>
     <section className="section compost-spotlight"><Photo src={site.photos.compost} alt="Composting 101 feature" className="compost-image" /><div><span className="eyebrow">Learn something new</span><h2>Composting 101</h2><p>Turn everyday plant scraps into something useful. Explore the basics of creating healthy compost.</p><Action to="/composting-101" variant="harvest">Explore Composting 101</Action></div></section></>;
 }
-function Mission() { return <section className="section narrow"><Heading eyebrow="Our purpose" title="Our Mission">{site.mission || 'The official mission statement will be added here.'}</Heading><div className="mission-decoration" aria-hidden="true">✿ ☼ ✿</div></section>; }
+function Mission() { return <section className="section narrow"><Heading eyebrow="Our purpose" title="Our Mission">{site.mission || 'We believe that community-driven sustainability is the answer to creating lasting change. From permaculture practices to regenerative farming, we are working to build a future that supports the earth and each other.As we continue to grow, we are doubling down on our commitment to permaculture and sustainable practices. Our goal is to create a model farm that demonstrates how small-scale agriculture can have a big impact on local food systems and environmental health. We’re committed to scaling up our composting efforts, increasing the diversity in our plants, and implementing more water-conservation strategies. We are investing in long-term sustainability, so that future generations will benefit from the work we are doing now.'}</Heading><div className="mission-decoration" aria-hidden="true">✿ ☼ ✿</div></section>; }
 
 function Cats() {
   return <><section className="section"><Heading eyebrow="Community cat care" title="Kiki’s Cat Club">{site.tnrIntro}</Heading>
@@ -93,11 +94,97 @@ function EmailDraftForm({ type }) {
 }
 function Volunteer() { return <section className="section form-layout"><div><Heading eyebrow="Get involved" title="Volunteer with us">{site.volunteerIntro}</Heading><p>Complete the form and tell us where you would like to help.</p></div><EmailDraftForm type="volunteer" /></section>; }
 function Contact() { return <section className="section form-layout"><div><Heading eyebrow="Say hello" title="Contact us">{site.contactIntro}</Heading></div><EmailDraftForm type="contact" /></section>; }
+
 function Social() {
-  return <section className="section"><Heading eyebrow="Stay connected" title="Social & Team">Follow along and meet the people behind the homestead.</Heading>
-    <div className="social-slot"><div><span aria-hidden="true">◎</span><h2>From the homestead</h2><p>Instagram feed/embed will appear here after setup.</p>{site.instagram && <a href={site.instagram} target="_blank" rel="noreferrer">View Instagram profile</a>}</div></div>
-    <div className="section-intro team-intro"><span className="eyebrow">Nice to meet you</span><h2>Our team</h2></div><div className="team-grid">{site.team.map(member => <article key={member.name} className="team-card"><Photo src={member.image} alt={member.name} /><h3>{member.name}</h3><p>{member.role}</p></article>)}</div>
-    <div className="section-intro team-intro"><h2>Team photo</h2><p>Add a group photo of the Sunbrewed team here.</p></div><Photo src="/images/team-group.jpg" alt="Sunbrewed Homestead team group photo" className="group-photo" />
-  </section>;
+  useEffect(() => {
+    const processEmbeds = () => {
+      window.instgrm?.Embeds?.process();
+    };
+
+    const existingScript = document.querySelector(
+      'script[src="https://www.instagram.com/embed.js"]'
+    );
+
+    if (existingScript) {
+      if (window.instgrm?.Embeds) {
+        processEmbeds();
+      } else {
+        existingScript.addEventListener('load', processEmbeds, {
+          once: true
+        });
+      }
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      script.onload = processEmbeds;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  return (
+    <section className="section">
+      <Heading eyebrow="Stay connected" title="Social & Team">
+        Follow along and meet the people behind the homestead.
+      </Heading>
+
+      <div className="social-slot">
+        <div>
+          <h2>From the homestead</h2>
+
+          <blockquote
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/sunbrewedhomestead/"
+            data-instgrm-version="14"
+          >
+            <a
+              href="https://www.instagram.com/sunbrewedhomestead/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Sunbrewed Homestead on Instagram
+            </a>
+          </blockquote>
+
+          {site.instagram && (
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Visit our Instagram profile
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div className="section-intro team-intro">
+        <span className="eyebrow">Nice to meet you</span>
+        <h2>Our team</h2>
+      </div>
+
+      <div className="team-grid">
+        {site.team.map(member => (
+          <article key={member.name} className="team-card">
+            <Photo src={member.image} alt={member.name} />
+            <h3>{member.name}</h3>
+            <p>{member.role}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="section-intro team-intro">
+        <h2>Team photo</h2>
+        <p>Meet the Sunbrewed Homestead team.</p>
+      </div>
+
+      <Photo
+        src="/images/team-group.jpg"
+        alt="Sunbrewed Homestead team group photo"
+        className="group-photo"
+      />
+    </section>
+  );
 }
+
 export default function App() { return <BrowserRouter><Layout /></BrowserRouter>; }
