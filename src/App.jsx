@@ -342,7 +342,344 @@ function EmailDraftForm({ type }) {
     <button className="button green" type="submit">Prepare email {isVolunteer ? 'to volunteer' : 'message'}</button><p className="form-note">This starter opens a draft in your email app; it does not submit data to a server.</p>{notice && <p role="status" className="form-notice">{notice}</p>}
   </form>;
 }
-function Volunteer() { return <section className="section form-layout"><div><Heading eyebrow="Get involved" title="Volunteer with us">{site.volunteerIntro}</Heading><p>Complete the form and tell us where you would like to help.</p></div><EmailDraftForm type="volunteer" /></section>; }
+
+function Volunteer() {
+  const initialForm = {
+    name: '',
+    email: '',
+    phone: '',
+    interests: [],
+    availability: '',
+    experience: '',
+    notes: '',
+    consentToShare: false
+  };
+
+  const [formData, setFormData] = useState(initialForm);
+  const [notice, setNotice] = useState('');
+
+  const interests = [
+    'Gardening & planting',
+    'Composting & soil care',
+    'Animal care',
+    'Farm maintenance',
+    'Events & community outreach',
+    'Education & workshops',
+    "Kiki's Cat Club / TNR",
+    "Wherever I'm needed"
+  ];
+
+  const experienceOptions = [
+    { value: 'new', label: "I'm completely new" },
+    { value: 'beginner', label: 'I know a little' },
+    { value: 'comfortable', label: "I'm comfortable in a garden" },
+    { value: 'experienced', label: 'I have lots of experience' },
+    {
+      value: 'other-skills',
+      label: 'My useful skills are mostly outside gardening'
+    }
+  ];
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target;
+    setFormData(current => ({
+      ...current,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  }
+
+  function handleInterestChange(interest) {
+    setFormData(current => ({
+      ...current,
+      interests: current.interests.includes(interest)
+        ? current.interests.filter(item => item !== interest)
+        : [...current.interests, interest]
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!site.email) {
+      setNotice('Please configure the email in siteData.js.');
+      return;
+    }
+
+    if (!formData.consentToShare) {
+      setNotice('Please confirm your consent before continuing.');
+      return;
+    }
+
+    const experienceLabel = experienceOptions.find(
+      option => option.value === formData.experience
+    )?.label || 'Not specified';
+
+    const subject = 'Volunteer Interest - Sunbrewed Homestead';
+
+    const body = [
+      'SUNBREWED HOMESTEAD',
+      'VOLUNTEER INTEREST FORM',
+      '--------------------------------',
+      '',
+      '01 - ABOUT YOU',
+      `Name: ${formData.name.trim()}`,
+      `Email: ${formData.email.trim()}`,
+      `Phone / Text: ${formData.phone.trim() || 'Not provided'}`,
+      '',
+      '02 - HOW WOULD YOU LIKE TO HELP?',
+      formData.interests.join(', ') || 'Not specified',
+      '',
+      '03 - AVAILABILITY',
+      formData.availability.trim(),
+      '',
+      'GARDENING EXPERIENCE',
+      experienceLabel,
+      '',
+      '04 - ADDITIONAL NOTES',
+      formData.notes.trim() || 'None',
+      '',
+      'CONSENT',
+      'Volunteer confirmed permission to share contact',
+      'information with Sunbrewed Homestead.',
+      '',
+      '--------------------------------',
+      'Prepared through the Sunbrewed Homestead website.'
+    ].join('\n');
+
+    window.location.href =
+      `mailto:${site.email}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    setNotice(
+      'Your email application should open with your responses. ' +
+      'Please press Send to complete your volunteer inquiry.'
+    );
+  }
+
+  return (
+    <section className="section sunbrewed-volunteer">
+
+      <div className="volunteer-hero">
+        <div>
+          <span className="eyebrow">Community volunteering</span>
+          <h1>Volunteer with Sunbrewed Homestead.</h1>
+          <p>{site.volunteerIntro}</p>
+          <p className="volunteer-location">
+            ● Van Nuys, California
+          </p>
+        </div>
+
+        <div className="volunteer-hero-art" aria-hidden="true">
+          <span>♡</span>
+          <strong>EXTRA<br />HANDS</strong>
+          <small>HELP GROW</small>
+        </div>
+      </div>
+
+      <div className="volunteer-expectations">
+        <div>
+          <span className="eyebrow">Before you sign up</span>
+          <h2>Tell us what works for you.</h2>
+        </div>
+        <div>
+          <p>
+            This isn't a job application. The goal is simply
+            to understand how you'd like to participate and
+            give Sunbrewed enough information to follow up.
+          </p>
+          <p>
+            Opportunities can change depending on current
+            projects, events, weather, and what needs attention.
+          </p>
+        </div>
+      </div>
+
+      <div className="volunteer-form-heading">
+        <span className="eyebrow">Volunteer interest form</span>
+        <h2>I'd like to help.</h2>
+        <p>You're contacting <strong>Sunbrewed Homestead</strong>.</p>
+      </div>
+
+      <form className="sunbrewed-volunteer-form" onSubmit={handleSubmit}>
+
+        <fieldset>
+          <legend><span>01</span> About you</legend>
+
+          <div className="volunteer-field">
+            <label htmlFor="vol-name">Name</label>
+            <input
+              id="vol-name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              autoComplete="name"
+              required
+            />
+          </div>
+
+          <div className="volunteer-field-row">
+            <div className="volunteer-field">
+              <label htmlFor="vol-email">Email</label>
+              <input
+                id="vol-email"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                autoComplete="email"
+                required
+              />
+            </div>
+
+            <div className="volunteer-field">
+              <label htmlFor="vol-phone">
+                Phone / text <small>Optional</small>
+              </label>
+              <input
+                id="vol-phone"
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                autoComplete="tel"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>02</span> How would you like to help?</legend>
+          <p>Pick as many as you'd like.</p>
+
+          <div className="volunteer-interest-grid">
+            {interests.map(interest => {
+              const selected = formData.interests.includes(interest);
+
+              return (
+                <label
+                  key={interest}
+                  className={`volunteer-interest-option ${selected ? 'selected' : ''
+                    }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selected}
+                    onChange={() => handleInterestChange(interest)}
+                  />
+                  <span>{selected ? '✓' : ''}</span>
+                  <strong>{interest}</strong>
+                </label>
+              );
+            })}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>03</span> Availability</legend>
+
+          <div className="volunteer-field">
+            <label htmlFor="vol-availability">
+              When are you generally available?
+            </label>
+            <textarea
+              id="vol-availability"
+              name="availability"
+              value={formData.availability}
+              onChange={handleChange}
+              rows="4"
+              placeholder="For example: Saturday mornings, some weekday afternoons, once or twice a month..."
+              required
+            />
+          </div>
+
+          <div className="volunteer-field">
+            <label htmlFor="vol-experience">
+              Gardening experience
+            </label>
+            <select
+              id="vol-experience"
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Choose one</option>
+              {experienceOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>04</span> Anything else?</legend>
+
+          <div className="volunteer-field">
+            <label htmlFor="vol-notes">
+              Notes <small>Optional</small>
+            </label>
+            <textarea
+              id="vol-notes"
+              name="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              rows="5"
+              placeholder="Skills, accessibility needs, questions, things you'd like to learn, or anything else."
+            />
+          </div>
+        </fieldset>
+
+        <div className="volunteer-consent">
+          <label>
+            <input
+              type="checkbox"
+              name="consentToShare"
+              checked={formData.consentToShare}
+              onChange={handleChange}
+              required
+            />
+            <span>
+              I understand my information will be included in
+              an email to Sunbrewed Homestead so they can
+              contact me about volunteering.
+            </span>
+          </label>
+        </div>
+
+        <div className="volunteer-submit-area">
+          <button type="submit" className="button green">
+            Prepare Volunteer Email
+          </button>
+
+          <p>
+            Your email application will open with your answers.
+            You must send the email to complete your inquiry.
+            This website does not store your responses.
+          </p>
+
+          {notice && <p role="status">{notice}</p>}
+        </div>
+      </form>
+
+      <div className="volunteer-footer-note">
+        <span>♡</span>
+        <div>
+          <span className="eyebrow">Not sure where you fit?</span>
+          <h2>That's completely okay.</h2>
+          <p>
+            Choose "Wherever I'm needed" or tell us a little
+            about yourself. Community projects need more
+            than experienced gardeners.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Contact() { return <section className="section form-layout"><div><Heading eyebrow="Say hello" title="Contact us">{site.contactIntro}</Heading></div><EmailDraftForm type="contact" /></section>; }
 
 function Social() {
