@@ -34,7 +34,8 @@ export const site = {
     { name: 'Cameron Aaron', role: 'Director of Development', image: '/images/team-3.jpg' },
     { name: 'Mari', role: 'Role forthcoming', image: '/images/team-4.jpg' },
     { name: 'Steven Guerra', role: 'Advisor', image: '/images/team-5.jpg' },
-    { name: 'Scoot', role: 'Director of Big Stretches', image: '/images/team-6.jpg' },
+    { name: 'Randy Vafai', role: 'Principal Horticulturist', image: '/images/team-6.jpg' },
+    { name: 'Scoot', role: 'Director of Big Stretches', image: '/images/team-7.jpg' },
   ],
   stats: [
     { label: 'Found forever homes', value: 29 },
