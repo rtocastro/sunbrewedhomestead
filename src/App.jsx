@@ -70,7 +70,7 @@ function Home() {
     <div className="logo-area"><img src={site.logo} alt="Sunbrewed Homestead logo" onError={e => { e.currentTarget.style.display = 'none'; }} /><h1>Sunbrewed<br /><em>Homestead</em></h1></div>
     <p className="lead">{site.homeIntro}</p><Action to="/volunteer">Get involved — Volunteer</Action></div>
     <div className="hero-art" aria-hidden="true"><div className="sun" /><div className="hill hill-one" /><div className="hill hill-two" /><span className="hero-flower">✿</span></div></section>
-    <section className="section"><div className="section-intro"><span className="eyebrow">Friends of the farm</span><h2>Meet the goats</h2><p>A few familiar faces from around the homestead.</p></div>
+    <section className="section"><div className="section-intro"><span className="eyebrow">Friends of the farm</span><h2>Meet the goats</h2><p>A few familiar faces from around the homestead. Meet Annie Rae & Maybelline ♡</p></div>
       <div className="photo-grid">{site.photos.goats.map((src, i) => <Photo key={src} src={src} alt={`Goat photo ${i + 1}`} />)}</div></section>
     <section className="section compost-spotlight"><Photo src={site.photos.compost} alt="Composting 101 feature" className="compost-image" /><div><span className="eyebrow">Learn something new</span><h2>Composting 101</h2><p>Turn everyday plant scraps into something useful. Explore the basics of creating healthy compost.</p><Action to="/composting-101" variant="harvest">Explore Composting 101</Action></div></section></>;
 }
