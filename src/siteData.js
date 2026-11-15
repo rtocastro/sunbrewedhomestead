@@ -14,7 +14,7 @@ export const site = {
   pickfreshUrl: 'https://share.pickfresh.net/seller/jn749n3ph7zsf63ybbg84s7h45856ywp',
   adoptionListingsUrl: 'https://www.adoptapet.com',
   adoptionApplicationUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSep48JAvAj_iqzy0LUsLBZBHDp3OmGO8SMqwkwhswVLjU_XNQ/viewform?pli=1',
-  donationUrl: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif',
+  donationUrl: '',
   fosterUrl: 'https://www.adoptapet.com',
   homeIntro: 'A community homestead where neighbors can connect through growing, learning, and caring for animals.',
   mission: '', // Official mission statement goes here

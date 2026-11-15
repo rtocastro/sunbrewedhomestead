@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 import { site } from './siteData';
 
+import PayPalDonate from './PayPalDonate';
+
 import './styles.css';
 
 const nav = [
@@ -38,29 +40,32 @@ function Layout() {
       <Route path="/kikis-cat-club/resources" element={<Resources />} /><Route path="/farm-stand" element={<FarmStand />} />
       <Route path="/volunteer" element={<Volunteer />} /><Route path="/contact" element={<Contact />} />
       <Route path="/social" element={<Social />} /><Route path="/composting-101" element={<Composting />} />
-      <Route path="*" element={<section className="section"><Heading title="Page not found" /><Action to="/">Back home</Action></section>} />
+      <Route
+        path="/donate"
+        element={
+          <section className="section">
+            <PayPalDonate />
+          </section>
+        }
+      />
+    <Route path="*" element={<section className="section"><Heading title="Page not found" /><Action to="/">Back home</Action></section>} />
+
     </Routes></main>
 
     <footer className="footer">
       <div className="footer-support">
         <span>Rooted in community. Growing together.</span>
 
-        {site.donationUrl && (
-          <a
-            href={site.donationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-donate"
-          >
-            ♡ Support the Homestead
-          </a>
-        )}
+        <Link to="/donate" className="footer-donate">
+          ♡ Support the Homestead
+        </Link>
       </div>
 
       <span>
         © {new Date().getFullYear()} Sunbrewed Homestead
       </span>
     </footer>
+
 
 
   </div>;
@@ -79,7 +84,9 @@ function Mission() { return <section className="section narrow"><Heading eyebrow
 function Cats() {
   return <><section className="section"><Heading eyebrow="Community cat care" title="Kiki’s Cat Club">{site.tnrIntro}</Heading>
     <div className="stat-grid">{site.stats.map((stat, i) => <div className={`stat stat-${i}`} key={stat.label}><strong>{stat.value ?? '—'}</strong><span>{stat.label}</span></div>)}</div>
-    <div className="button-group"><Action to={site.donationUrl} external variant="coral">Donate</Action><Action to="/kikis-cat-club/adopt" variant="turquoise">Adopt a cat</Action><Action to="/kikis-cat-club/resources" variant="purple">Need help spaying community cats?</Action><Action to={site.fosterUrl} external variant="harvest">Foster</Action><Action to="/volunteer">Volunteer</Action></div>
+    <div className="button-group"><Action to="/donate" variant="coral">
+      Donate
+    </Action><Action to="/kikis-cat-club/adopt" variant="turquoise">Adopt a cat</Action><Action to="/kikis-cat-club/resources" variant="purple">Need help spaying community cats?</Action><Action to={site.fosterUrl} external variant="harvest">Foster</Action><Action to="/volunteer">Volunteer</Action></div>
   </section></>;
 }
 

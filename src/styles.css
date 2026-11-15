@@ -1090,3 +1090,78 @@ textarea:focus-visible {
   }
 }
 
+
+/* Sunbrewed PayPal Donation Page */
+
+.paypal-donate-wrapper {
+  max-width: 600px;
+  margin: 40px auto 70px;
+  padding: 40px 28px;
+  background: #eaf7f1;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.paypal-donate-wrapper h2 {
+  color: #008C5F;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-bottom: 16px;
+}
+
+.paypal-donate-wrapper p {
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.paypal-error {
+  color: #E43C37;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .paypal-donate-wrapper {
+    padding: 28px 18px;
+    margin: 25px auto 50px;
+  }
+}
+
+
+
+/* Center PayPal donation widget */
+
+.paypal-donate-wrapper {
+  text-align: center;
+}
+
+
+/* PayPal donation page — safe centering */
+
+.paypal-donate-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto 70px;
+  padding: 40px 28px;
+  background: #eaf7f1;
+  border-radius: 24px;
+  text-align: center;
+}
+
+/* Center the widget as a single block */
+#paypal-container-83Q6ZDW7BE8GL {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .paypal-donate-wrapper {
+    padding: 28px 18px;
+    margin: 25px auto 50px;
+  }
+
+  #paypal-container-83Q6ZDW7BE8GL {
+    max-width: 100%;
+  }
+}
