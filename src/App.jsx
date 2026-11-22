@@ -767,7 +767,7 @@ function Social() {
         ))}
       </div>
 
-      <div className="section-intro team-intro">
+      {/* <div className="section-intro team-intro">
         <h2>Team photo</h2>
         <p>Meet the Sunbrewed Homestead team.</p>
       </div>
@@ -776,7 +776,7 @@ function Social() {
         src="/images/team-group.jpg"
         alt="Sunbrewed Homestead team group photo"
         className="group-photo"
-      />
+      /> */}
     </section>
   );
 }
