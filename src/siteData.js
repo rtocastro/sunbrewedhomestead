@@ -4,7 +4,7 @@ export const palette = {
 };
 
 
-// Replace these values as real content, images, and links become available.
+// Links, websites, urls section.
 export const site = {
   name: 'Sunbrewed Homestead',
   logo: '/images/logo.png',
