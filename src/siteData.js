@@ -32,7 +32,7 @@ export const site = {
     { name: 'Ava Rosate', role: 'Executive Director', image: '/images/team-1.jpg' },
     { name: 'Ricardo Torres Castro', role: 'Director of Community Engagement & Development', image: '/images/team-2.jpg' },
     { name: 'Cameron Aaron', role: 'Director of Development', image: '/images/team-3.jpg' },
-    { name: 'Mari', role: 'Role forthcoming', image: '/images/team-4.jpg' },
+    { name: 'Mari', role: 'Advisor', image: '/images/team-4.jpg' },
     { name: 'Steven Guerra', role: 'Advisor', image: '/images/team-5.jpg' },
     { name: 'Randy Vafai', role: 'Principal Horticulturist', image: '/images/team-3.jpg' },
     { name: 'Scoot', role: 'Director of Big Stretches', image: '/images/team-7.jpg' },
