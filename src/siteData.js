@@ -16,7 +16,7 @@ export const site = {
   adoptionApplicationUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSep48JAvAj_iqzy0LUsLBZBHDp3OmGO8SMqwkwhswVLjU_XNQ/viewform?pli=1',
   donationUrl: '',
   fosterUrl: 'https://www.adoptapet.com',
-  homeIntro: 'A community homestead where neighbors can connect through growing, learning, and caring for animals.',
+  homeIntro: 'We believe that community-driven sustainability is the answer to creating lasting change. From permaculture practices to regenerative farming, we are working to build a future that supports the earth and each other.',
   mission: '', // Official mission statement goes here
   tnrIntro: 'Kikis Cat Club is dedicated to the safety of free roaming cats in Los Angeles. We provide sterilization of free roaming community cats through Los Angeles Countys City Wide TNR program. If the cat or kitten is in need of a forever home, they are placed into our foster program where they are spayed, socialized, litter trained, dewormed, deflead and put on our for adoption list.',
   farmStandIntro: 'See what is fresh and find out how to support the farm stand.',
